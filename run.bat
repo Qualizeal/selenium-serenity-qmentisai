@@ -1,1 +1,2 @@
-mvn clean serenity:aggregate verify
+mvn clean verify
+

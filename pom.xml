@@ -12,8 +12,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<serenity.version>2.6.0</serenity.version>
-		<cucumber.version>6.11.0</cucumber.version>
+		<serenity.version>4.2.8</serenity.version>
+		<cucumber.version>7.18.1</cucumber.version>
 		<maven.version>3.0.0-M5</maven.version>
 	</properties>
 	<dependencies>
@@ -52,10 +52,10 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/net.serenity-bdd/serenity-cucumber6 -->
+		<!-- https://mvnrepository.com/artifact/net.serenity-bdd/serenity-cucumber -->
 		<dependency>
 			<groupId>net.serenity-bdd</groupId>
-			<artifactId>serenity-cucumber6</artifactId>
+			<artifactId>serenity-cucumber</artifactId>
 			<version>${serenity.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
@@ -89,17 +89,17 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>${maven.version}</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>3.2.5</version>
 				<configuration>
 					<includes>
 						<include>**/TestRunner.java</include>
 					</includes>
-					<forkCount>2</forkCount>
-					<reuseForks>true</reuseForks>
-					<parallel>methods</parallel>
-					<threadCount>2</threadCount>
-					<argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
+                    <argLine>-Xmx1024m -XX:MetaspaceSize=256m</argLine>
+                    <useSystemClassLoader>false</useSystemClassLoader>
+                    <forkCount>1</forkCount>
+                    <reuseForks>false</reuseForks>
 				</configuration>
 				<executions>
 					<execution>
