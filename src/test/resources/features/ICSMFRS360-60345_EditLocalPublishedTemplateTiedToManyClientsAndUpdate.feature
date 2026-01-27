@@ -6,3 +6,9 @@ Feature: Edit local published template tied to many clients and update
 
   Scenario:
     Given The user is logged into the Cloud Platform application
+    Then Launch "Fiduciary Focus Toolkit™"
+    Then Click on Settings from top right corner
+    Then Navigate to Investment Policy Templates on Settings page
+    Then Select the template "QZ Policy Test Template"
+    And Update the template with text "This is a test update"
+    Then Verify the update is successful

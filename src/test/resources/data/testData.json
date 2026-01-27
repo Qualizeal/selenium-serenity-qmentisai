@@ -1,0 +1,39 @@
+{
+  "validUsers": [
+    {
+      "username": "qzteam@test.com",
+      "password": "QZteam2025!",
+      "role": "admin",
+      "description": "Primary test admin user"
+    },
+    {
+      "username": "test.user@fi360.com",
+      "password": "TestUser123!",
+      "role": "standard_user",
+      "description": "Standard test user with limited permissions"
+    }
+  ],
+  "invalidUsers": [
+    {
+      "username": "invalid.user@test.com",
+      "password": "WrongPassword",
+      "expectedError": "Invalid credentials",
+      "description": "Invalid username test case"
+    },
+    {
+      "username": "admin' OR '1'='1",
+      "password": "password",
+      "expectedError": "Invalid credentials",
+      "description": "SQL injection attempt"
+    }
+  ],
+  "accountCreation": {
+    "firstName": "Test",
+    "lastName": "User",
+    "email": "newuser@test.com",
+    "password": "SecurePass123!",
+    "confirmPassword": "SecurePass123!",
+    "company": "Test Company",
+    "role": "Analyst"
+  }
+}

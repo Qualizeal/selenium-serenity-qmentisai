@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * Utility class to read configuration from serenity.properties file
+ * Utility class to read configuration from serenity.properties file.
  */
 public class SerenityConfigReader {
 
@@ -26,24 +26,17 @@ public class SerenityConfigReader {
 		// Try to load from file system first
 		try (InputStream inputStream = new FileInputStream(PROPERTIES_FILE)) {
 			properties.load(inputStream);
-			System.out.println("Loaded properties from file: " + PROPERTIES_FILE);
 		} catch (IOException e) {
 			// If not found in file system, try classpath
 			try (InputStream inputStream = SerenityConfigReader.class.getClassLoader()
 					.getResourceAsStream(PROPERTIES_FILE)) {
 				if (inputStream != null) {
 					properties.load(inputStream);
-					System.out.println("Loaded properties from classpath: " + PROPERTIES_FILE);
-				} else {
-					System.err.println("Unable to find " + PROPERTIES_FILE);
 				}
 			} catch (IOException ex) {
-				System.err.println("Error loading properties: " + ex.getMessage());
+				// Ignore - will use defaults
 			}
 		}
-
-		// Also load from System properties (Serenity loads properties here)
-		properties.putAll(System.getProperties());
 	}
 
 	/**
@@ -52,9 +45,9 @@ public class SerenityConfigReader {
 	 * @return property value
 	 */
 	public static String getProperty(String key) {
-		// First try system property (Serenity loads them here)
+		// First try system property (if non-empty)
 		String value = System.getProperty(key);
-		if (value != null) {
+		if (value != null && !value.isEmpty()) {
 			return value;
 		}
 		// Then try from loaded properties file
@@ -135,7 +128,7 @@ public class SerenityConfigReader {
 	 * @return environment
 	 */
 	public static String getEnvironment() {
-		return getProperty("report.customfields.environment", "QA");
+		return getProperty("test.environment", "qa");
 	}
 
 	/**
@@ -164,4 +157,3 @@ public class SerenityConfigReader {
 		return sb.toString();
 	}
 }
-
