@@ -14,15 +14,13 @@ import net.serenitybdd.cucumber.CucumberWithSerenity;
  */
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
-		plugin = {
-			"pretty:target/cucumber/cucumber.txt", 
-			"html:target/cucumber/cucumber-html-report",
-			"json:target/cucumber/cucumber.json"
-		},
-		features = "src/test/resources/features",
-		glue = {"com.serenity.stepdefinition", "com.serenity.hooks"},
-		monochrome = true,
-		tags = "@ICSMFRS360-60345"
+	features = "src/test/resources/features",
+    glue = {
+        "com.serenity.stepdefinition",
+        "com.serenity.hooks"
+    },
+    monochrome = true,
+    tags = "@ICSMFRS360-60345"
 )
 public class TestRunner {
 

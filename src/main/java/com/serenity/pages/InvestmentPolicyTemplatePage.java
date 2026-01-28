@@ -15,7 +15,7 @@ public class InvestmentPolicyTemplatePage extends BasePage {
     @FindBy(xpath = "//form[@id='template-update']")
     private WebElementFacade templateUpdateForm;
 
-    @FindBy(xpath = "//body[@id='tinymce']")
+    @FindBy(xpath = "//iframe[@id='ui-tinymce-1_ifr']//body[@id='tinymce']")
     private WebElementFacade tinymceTextArea;
 
     @FindBy(xpath = "//button[text()='Update']")

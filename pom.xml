@@ -1,168 +1,137 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	<groupId>Serenity</groupId>
-	<artifactId>Serenity</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+    <modelVersion>4.0.0</modelVersion>
 
-	<name>Serenity</name>
-	<url>http://maven.apache.org</url>
+    <groupId>serenity</groupId>
+    <artifactId>serenity-bdd</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<serenity.version>4.2.8</serenity.version>
-		<cucumber.version>7.18.1</cucumber.version>
-		<maven.version>3.0.0-M5</maven.version>
-		<assertj.version>3.25.3</assertj.version>
-		<java.version>11</java.version>
-	</properties>
-	<dependencies>
-		<!-- Core Serenity BDD dependency - includes selenium and reporting -->
-		<dependency>
-			<groupId>net.serenity-bdd</groupId>
-			<artifactId>serenity-core</artifactId>
-			<version>${serenity.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>io.cucumber</groupId>
-					<artifactId>cucumber-core</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<!-- Serenity Cucumber integration -->
-		<dependency>
-			<groupId>net.serenity-bdd</groupId>
-			<artifactId>serenity-cucumber</artifactId>
-			<version>${serenity.version}</version>
-		</dependency>
-		<!-- Cucumber dependencies -->
-		<dependency>
-			<groupId>io.cucumber</groupId>
-			<artifactId>cucumber-java</artifactId>
-			<version>${cucumber.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.cucumber</groupId>
-			<artifactId>cucumber-junit</artifactId>
-			<version>${cucumber.version}</version>
-		</dependency>
-		<!-- JUnit for test execution -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.13.2</version>
-		</dependency>
-		<!-- Logging -->
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.5.15</version>
-		</dependency>
-		<!-- AssertJ for fluent assertions -->
-		<dependency>
-			<groupId>org.assertj</groupId>
-			<artifactId>assertj-core</artifactId>
-			<version>${assertj.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<!-- Environment variable support -->
-		<dependency>
-			<groupId>io.github.cdimascio</groupId>
-			<artifactId>dotenv-java</artifactId>
-			<version>3.0.0</version>
-		</dependency>
-		<!-- Apache Commons Lang for utilities -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.14.0</version>
-		</dependency>
-	</dependencies>
-	<build>
-		<plugins>
-			<!-- Surefire for unit tests (none in this project, skip) -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${maven.version}</version>
-				<configuration>
-					<skipTests>true</skipTests>
-				</configuration>
-			</plugin>
-			<!-- Failsafe for integration tests (Serenity BDD tests) -->
-			<plugin>
+    <properties>
+        <serenity.version>4.2.8</serenity.version>
+        <cucumber.version>7.18.1</cucumber.version>
+        <java.version>11</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+
+        <!-- Serenity Core -->
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-core</artifactId>
+            <version>${serenity.version}</version>
+        </dependency>
+
+        <!-- Serenity Cucumber -->
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-cucumber</artifactId>
+            <version>${serenity.version}</version>
+        </dependency>
+
+        <!-- Selenium (pulled transitively, but explicit = safer) -->
+        <!-- Removed explicit Selenium dependency - using version from Serenity BDD -->
+        <!-- This prevents version conflicts with Serenity's WebDriver management -->
+
+        <!-- Cucumber -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+
+        <!-- JUnit 4 (REQUIRED for Serenity) -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+        </dependency>
+
+        <!-- Assertions -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.25.3</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Logging -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.5.15</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <!-- Compiler -->
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>3.2.5</version>
-				<configuration>
-					<includes>
-						<include>**/TestRunner.java</include>
-					</includes>
-                    <argLine>-Xmx2048m -XX:MetaspaceSize=512m</argLine>
-                    <useSystemClassLoader>false</useSystemClassLoader>
-                    <!-- Parallel execution: adjust forkCount based on your machine -->
-                    <forkCount>${env.FORK_COUNT}</forkCount>
-                    <reuseForks>false</reuseForks>
-                    <testFailureIgnore>false</testFailureIgnore>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
+            <!-- Maven Surefire Plugin - Executes JUnit tests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M9</version>
+                <configuration>
+                    <!-- Continue build even if tests fail - allows Serenity reports to be generated -->
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <includes>
+                        <include>**/TestRunner.java</include>
+                        <include>**/*Test.java</include>
+                        <include>**/*Tests.java</include>
+                    </includes>
                     <systemPropertyVariables>
-                        <webdriver.base.url>${env.TEST_BASE_URL}</webdriver.base.url>
-                        <webdriver.base.username>${env.TEST_USERNAME}</webdriver.base.username>
-                        <webdriver.base.password>${env.TEST_PASSWORD}</webdriver.base.password>
-                        <webdriver.driver>${env.BROWSER_TYPE}</webdriver.driver>
+                        <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
                     </systemPropertyVariables>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.maven.surefire</groupId>
-						<artifactId>surefire-junit47</artifactId>
-						<version>3.2.5</version>
-					</dependency>
-				</dependencies>
-				<executions>
-					<execution>
-						<goals>
-							<goal>integration-test</goal>
-							<goal>verify</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<!-- Compiler plugin -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.11.0</version>
-				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>net.serenity-bdd.maven.plugins</groupId>
-				<artifactId>serenity-maven-plugin</artifactId>
-				<version>${serenity.version}</version>
-				<executions>
-					<execution>
-						<id>serenity-reports</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>aggregate</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-plugin-plugin</artifactId>
-				<version>3.6.1</version>
-				<configuration>
-					<goalPrefix>plugin</goalPrefix>
-					<outputDirectory>target/dir</outputDirectory>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+                    <!-- Force JUnit 4 provider for Cucumber with Serenity -->
+                    <useModulePath>false</useModulePath>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-junit47</artifactId>
+                        <version>3.0.0-M9</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <!-- Serenity Reports -->
+            <plugin>
+                <groupId>net.serenity-bdd.maven.plugins</groupId>
+                <artifactId>serenity-maven-plugin</artifactId>
+                <version>${serenity.version}</version>
+                <executions>
+                    <execution>
+                        <id>serenity-reports</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>aggregate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
 </project>
