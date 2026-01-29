@@ -31,3 +31,27 @@
 target/
 test-output/
 .settings/
+
+# Environment and Security #
+############################
+.env
+.env.local
+.env.*.local
+credentials.properties
+secrets.properties
+*-credentials.json
+*.pem
+*.key
+
+# IDE specific #
+################
+.idea/
+*.iml
+.vscode/
+.DS_Store
+
+# Downloads and temporary files #
+##################################
+downloads/
+temp/
+*.tmp
