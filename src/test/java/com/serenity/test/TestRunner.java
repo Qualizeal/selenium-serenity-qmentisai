@@ -14,13 +14,14 @@ import net.serenitybdd.cucumber.CucumberWithSerenity;
  */
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
-	features = "src/test/resources/features",
+	features = {"src/test/resources/features", "src/test/resources/features/ICSM_TAP_Deal_Intake_Opportunity_PandC.feature"},
     glue = {
         "com.serenity.stepdefinition",
+        "com.serenity.stepdefinition.TAPDealIntakeOpportunityStepDefinitions",
         "com.serenity.hooks"
     },
     monochrome = true,
-    tags = "@ICSMFRS360-60345"
+    tags = "@ICSMFRS360-60345 or @ICSM_TAP"
 )
 public class TestRunner {
 
