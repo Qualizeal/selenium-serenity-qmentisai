@@ -1,0 +1,56 @@
+{
+  "validTAPUsers": [
+    {
+      "username": "tap.user@test.com",
+      "password": "TAPUser2024!",
+      "role": "tap_user",
+      "description": "Primary TAP user for Deal Intake tests"
+    }
+  ],
+  "accounts": [
+    {
+      "accountName": "Hecht Partners, LLP",
+      "accountId": "0013i00000XXXXXXX",
+      "recordType": "Client",
+      "description": "Client account for TAP Deal Intake test"
+    }
+  ],
+  "producer": {
+    "name": "John Doe",
+    "producerId": "0053i00000YYYYYYY",
+    "description": "Primary Producer for TAP Deal Intake"
+  },
+  "opportunityDefaults": {
+    "dealType": "P&C",
+    "dealStructure": "Platform",
+    "opportunityName": "TAP Deal Intake Opportunity - P&C",
+    "signDate": "2024-06-10",
+    "targetCloseDate": "2024-07-01",
+    "deliverableDueDate": "2024-07-15",
+    "stage": "Intake",
+    "repsWarranty": "Yes",
+    "diligenceFeeAgreement": "Yes",
+    "loiSigned": "Yes",
+    "pAndCStrategy": ["Add-On"],
+    "peopleSolutionsStrategy": ["Platform"],
+    "reportType": "Full Report",
+    "locationOfTarget": "New York, NY",
+    "enterpriseValue": "5000000",
+    "internationalOperations": false
+  },
+  "buyer": {
+    "accountName": "Acme Holdings LLC",
+    "accountId": "0013i00000ZZZZZZZ",
+    "description": "Buyer account for lookup"
+  },
+  "target": {
+    "accountName": "TargetCo Inc.",
+    "accountId": "0013i00000AAAAAAA",
+    "description": "Target account for lookup"
+  },
+  "numericFields": {
+    "numberOfEmployees": 150,
+    "revenue": 12000000,
+    "diligenceFee": 50000
+  }
+}
