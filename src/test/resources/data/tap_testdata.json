@@ -1,0 +1,87 @@
+{
+  "tapUsers": [
+    {
+      "username": "dillon.cox@lockton.com.cbqa",
+      "password": "TAPUser2024!",
+      "role": "tap_profile_user",
+      "description": "TAP Profile User for TAP Deal Intake tests (Dillon Cox)"
+    },
+    {
+      "username": "integration.user@lockton.com.cbqa",
+      "password": "IntegrationUser2024!",
+      "role": "integration_user",
+      "description": "Salesforce Integration User for TAP automation"
+    }
+  ],
+  "tapAccounts": [
+    {
+      "accountName": "1031 Exchange Corporation",
+      "accountRecordType": "Client",
+      "accountId": "001Do00000U7PMTIA3",
+      "primaryContact": {
+        "name": "Teresa Person",
+        "email": "tpersontest@1031exchangecorp.com",
+        "role": "General",
+        "isActive": true,
+        "isPrimary": true
+      },
+      "billingState": "TX",
+      "ownerAlias": "iuser",
+      "description": "Sample Client Account for TAP Deal Intake tests"
+    },
+    {
+      "accountName": "Hecht Partners, LLP",
+      "accountRecordType": "Client",
+      "accountId": "001Do00000U7Tz5IAF",
+      "primaryContact": null,
+      "billingState": "TX",
+      "ownerAlias": "rroy",
+      "description": "Alternate Client Account for TAP tests"
+    }
+  ],
+  "tapDealIntakeOpportunities": [
+    {
+      "testCaseId": "TC-001",
+      "testCaseName": "TC_001_New TAP Deal Intake Opportunity_Deal Type - P&C",
+      "dealType": "P&C",
+      "opportunityName": "TAP P&C Opportunity Automation",
+      "primaryProducer": "Riley Johnson",
+      "dealStructure": "Buyout",
+      "pncStrategy": ["Add-On", "Platform"],
+      "peopleSolutionsStrategy": ["Carveout"],
+      "signDate": "2024-06-01",
+      "buyerAccount": {
+        "name": "Acme Holdings LLC",
+        "accountId": "001Do00000U7PMiIAN"
+      },
+      "targetAccount": {
+        "name": "TargetCo Inc.",
+        "accountId": "0013i00002aqtNKAAY"
+      },
+      "targetCloseDate": "2024-08-15",
+      "repsAndWarranty": "Yes",
+      "numberOfEmployees": 120,
+      "revenue": 25000000,
+      "diligenceFeeAgreement": "Signed",
+      "loiSigned": "Yes",
+      "stage": "Intake",
+      "deliverableDueDate": "2024-09-01",
+      "expectedSuccessMessage": "Opportunity 'TAP P&C Opportunity Automation' was created.",
+      "expectedChevronPathCount": 1,
+      "expectedOpportunityStages": [
+        "Intake",
+        "Pending VDR Access",
+        "Data Gathering",
+        "Engage Account Team",
+        "Write Report",
+        "Report Delivered",
+        "Closed Won",
+        "Closed Lost"
+      ],
+      "stageChevronVerification": true,
+      "testPriority": "High",
+      "testType": "Functional",
+      "description": "Validate creation of new TAP Deal Intake Opportunity with Deal Type P&C."
+    }
+  ]
+}
