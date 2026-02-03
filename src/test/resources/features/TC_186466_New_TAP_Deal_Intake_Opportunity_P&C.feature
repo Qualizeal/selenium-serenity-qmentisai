@@ -3,19 +3,19 @@ Feature: TC_001_New TAP Deal Intake Opportunity - Deal Type: P&C
   I want to create a new TAP Deal Intake Opportunity with Deal Type P&C
   So that I can track and manage the opportunity lifecycle in Salesforce
 
-  # Test data for this scenario is driven from testData.json and createAccount.json
-  # Placeholders in angle brackets (<...>) are to be replaced by data from the test data files
+  # Test data for this scenario is driven from testData_TAPDealIntake.json
+  # Placeholders in angle brackets (<...>) are to be referenced by data from the test data file or DataTable
 
   @TAP @Opportunity @P&C @TC_186466
-  Scenario: Create a new TAP Deal Intake Opportunity for Deal Type P&C and validate opportunity stages
-    Given the user logs into Salesforce with valid credentials from "testData.json" as <tapUser>
+  Scenario Outline: Create a new TAP Deal Intake Opportunity for Deal Type P&C and validate opportunity stages
+    Given the user logs into Salesforce with valid credentials from "testData_TAPDealIntake.json" as <tapUser>
     And the user logs in as TAP user <tapUser>
     When the user selects "Accounts" from the Home dropdown
     And the user selects an Account with Record Type "Client" named <accountName>
     And the user navigates to the "Related" tab on the Account page
     And the user clicks the "New" button in the 'Open Opportunities' related list
     And the user selects the "TAP Deal Intake" radio button and clicks "Next"
-    And the user selects "P&C" from the "Deal Type" field
+    And the user selects <dealType> from the "Deal Type" field
     And the user searches and selects <primaryProducer> in the "Primary Producer" field
     And the user enters <opportunityName> in the "Opportunity Name" field
     And the user selects <dealStructure> from the "Deal Structure" field
@@ -47,8 +47,8 @@ Feature: TC_001_New TAP Deal Intake Opportunity - Deal Type: P&C
     When the user clicks each stage chevron
     Then the stage of the opportunity should update accordingly
 
-    # Example test data mapping (to be provided in the test data file):
-    # | tapUser      | accountName      | primaryProducer | opportunityName | dealStructure | pcStrategy | peopleSolutionsStrategy | signDate   | buyerAccount | targetAccount | targetCloseDate | repsWarranty | numberOfEmployees | revenue | diligenceFeeAgreement | loiSigned | stage | deliverableDueDate |
-    # | TAP_Admin_01 | Acme Corporation | John Producer   | P&C Deal 2024   | Platform      | Add-On     | Carveout               | 2024-06-01 | Buyer LLC    | Target Inc    | 2024-08-15      | Yes          | 200               | 5000000 | Yes                  | No        | Intake| 2024-09-01        |
+    Examples:
+      | tapUser           | accountName             | dealType | primaryProducer | opportunityName   | dealStructure | pcStrategy | peopleSolutionsStrategy | signDate    | buyerAccount   | targetAccount   | targetCloseDate | repsWarranty | numberOfEmployees | revenue  | diligenceFeeAgreement | loiSigned | stage  | deliverableDueDate |
+      | tap.user@test.com | Hecht Partners, LLP     | P&C      | John Doe        | P&C Deal 2024     | Platform      | Add-On     | Platform                | 2024-06-10  | Buyer LLC      | Target Inc      | 2024-07-01      | Yes         | 200               | 5000000  | Yes                  | No        | Intake | 2024-07-15        |
 
-    # All steps are mapped to TAPDealIntakeOpportunityStepDefinitions for implementation.
+  # All steps are mapped to TAPDealIntakeOpportunityStepDefinitions for implementation.

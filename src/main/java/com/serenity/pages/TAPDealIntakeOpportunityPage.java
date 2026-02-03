@@ -430,8 +430,71 @@ public class TAPDealIntakeOpportunityPage extends BasePage {
         }
     }
 
-    // --- Placeholder for chevron/stage validation methods (not implemented here) ---
-    // public void validateChevronsAndStages() { ... }
+    // --- Chevron/Stage Path and Stage Validation ---
+
+    /**
+     * Validates that only one chevron path is displayed on the Opportunity page.
+     * Throws AssertionError if validation fails.
+     */
+    public void validateSingleChevronPathDisplayed() {
+        logStep("Validating only one chevron path is displayed");
+        List<WebElement> chevronPaths = getDriver().findElements(By.xpath("//div[contains(@class,'slds-path__scroller')]//svg//*[name()='path']"));
+        int visiblePaths = 0;
+        for (WebElement path : chevronPaths) {
+            if (path.isDisplayed()) {
+                visiblePaths++;
+            }
+        }
+        if (visiblePaths != 1) {
+            captureFailureScreenshot("ChevronPathValidationFailed");
+            throw new AssertionError("Expected only one chevron path to be displayed, but found: " + visiblePaths);
+        }
+        logStep("Chevron path validation passed: only one path displayed");
+    }
+
+    /**
+     * Validates the Opportunity stages chevron sequence matches the expected.
+     * @param expectedStages Array of expected stage names in order
+     */
+    public void validateOpportunityStages(String[] expectedStages) {
+        logStep("Validating Opportunity stages chevron sequence");
+        List<WebElementFacade> stageElements = findAll(By.xpath("//li[contains(@class,'slds-path__item')]//span[@class='slds-path__title']"));
+        if (stageElements.size() != expectedStages.length) {
+            captureFailureScreenshot("StageCountValidationFailed");
+            throw new AssertionError("Expected " + expectedStages.length + " stages, but found: " + stageElements.size());
+        }
+        for (int i = 0; i < expectedStages.length; i++) {
+            String actual = stageElements.get(i).getText().trim();
+            if (!actual.equals(expectedStages[i])) {
+                captureFailureScreenshot("StageNameValidationFailed");
+                throw new AssertionError("Stage mismatch at position " + (i+1) + ": expected '" + expectedStages[i] + "', found '" + actual + "'");
+            }
+        }
+        logStep("Opportunity stages chevron sequence validated successfully");
+    }
+
+    /**
+     * Clicks each stage chevron and validates the stage of the opportunity is changed.
+     * @param stages Array of stage names in order to click and validate
+     */
+    public void clickEachStageAndValidate(String[] stages) {
+        logStep("Clicking each stage chevron and validating stage change");
+        for (String stage : stages) {
+            WebElementFacade stageChevron = find(By.xpath("//li[contains(@class,'slds-path__item')]//span[@class='slds-path__title' and text()='" + stage + "']"));
+            waitForElementClickable(stageChevron, DEFAULT_TIMEOUT);
+            stageChevron.click();
+            waitFor(Duration.ofSeconds(1));
+            // Validate active stage
+            WebElementFacade activeStage = find(By.xpath("//li[contains(@class,'slds-path__item slds-is-current')]//span[@class='slds-path__title']"));
+            String activeStageName = activeStage.getText().trim();
+            if (!activeStageName.equals(stage)) {
+                captureFailureScreenshot("StageChangeValidationFailed_" + stage);
+                throw new AssertionError("After clicking stage '" + stage + "', active stage is '" + activeStageName + "'");
+            }
+            logStep("Stage changed to: " + stage);
+        }
+        logStep("All stages clicked and validated successfully");
+    }
 
     // --- Logging wrapper ---
     private void logStep(String stepDescription) {
