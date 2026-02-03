@@ -13,6 +13,18 @@
       "accountId": "0013i00000XXXXXXX",
       "recordType": "Client",
       "description": "Client account for TAP Deal Intake test"
+    },
+    {
+      "accountName": "Acme Holdings LLC",
+      "accountId": "0013i00000ZZZZZZZ",
+      "recordType": "Buyer",
+      "description": "Buyer account for lookup"
+    },
+    {
+      "accountName": "TargetCo Inc.",
+      "accountId": "0013i00000AAAAAAA",
+      "recordType": "Target",
+      "description": "Target account for lookup"
     }
   ],
   "producer": {
@@ -36,7 +48,39 @@
     "reportType": "Full Report",
     "locationOfTarget": "New York, NY",
     "enterpriseValue": "5000000",
-    "internationalOperations": false
+    "internationalOperations": false,
+    "buyerAccount": {
+      "accountName": "Acme Holdings LLC",
+      "accountId": "0013i00000ZZZZZZZ"
+    },
+    "targetAccount": {
+      "accountName": "TargetCo Inc.",
+      "accountId": "0013i00000AAAAAAA"
+    },
+    "primaryProducer": {
+      "name": "John Doe",
+      "producerId": "0053i00000YYYYYYY"
+    },
+    "numberOfEmployees": 150,
+    "revenue": 12000000,
+    "diligenceFee": 50000,
+    "usPCInvoiceAmount": 250000,
+    "usPeopleSolutionsInvoiceAmount": 100000,
+    "internationalInvoiceAmount": 80000,
+    "internationalDiligenceFee": 15000,
+    "numberOfInternationalEmployees": 25,
+    "internationalCountryDetail": ["United States of America", "Canada"],
+    "secondaryStage": "Intake",
+    "repWarrantyRevenue": 10000,
+    "pcRecurringRevenue": 20000,
+    "peopleSolutionsRecurringRevenue": 15000,
+    "pcTailRevenue": 5000,
+    "newBusinessOpportunity": "Yes",
+    "internationalCharges": false,
+    "usInvoiceCreatedDate": "2024-07-02",
+    "internationalInvoiceCreatedDate": "2024-07-03",
+    "internationalBenefitsInvoiceStatus": "Pending",
+    "dateReportIssued": "2024-07-12"
   },
   "buyer": {
     "accountName": "Acme Holdings LLC",
@@ -51,6 +95,11 @@
   "numericFields": {
     "numberOfEmployees": 150,
     "revenue": 12000000,
-    "diligenceFee": 50000
+    "diligenceFee": 50000,
+    "usPCInvoiceAmount": 250000,
+    "usPeopleSolutionsInvoiceAmount": 100000,
+    "internationalInvoiceAmount": 80000,
+    "internationalDiligenceFee": 15000,
+    "numberOfInternationalEmployees": 25
   }
 }
