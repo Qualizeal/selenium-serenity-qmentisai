@@ -5,6 +5,7 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.By;
 import java.time.Duration;
+
 public class SettingsPage extends BasePage {
     @FindBy(xpath = "//a[normalize-space()='Investment Policy Templates']")
     private WebElementFacade investmentPolicyTemplatesLink;
@@ -17,6 +18,57 @@ public class SettingsPage extends BasePage {
     
     @FindBy(xpath = "//span[text()='View Template']")
     private WebElementFacade viewTemplateLink;
+
+    // Locators for Application section and Investment Policy Templates link in left navigation
+    private static final By APPLICATION_SECTION = By.xpath("//a[normalize-space()='Application']");
+    private static final By INVESTMENT_POLICY_TEMPLATES_LINK = By.xpath("//a[normalize-space()='Investment Policy Templates']");
+
+    /**
+     * Navigates to the Investment Policy Templates page from the Workspace Setup context.
+     * Ensures the Application section is visible and expanded, then clicks the Investment Policy Templates link.
+     */
+    public void navigateToInvestmentPolicyTemplates() {
+        try {
+            // Wait for the Application section to be visible and clickable
+            WebElementFacade applicationSection = find(APPLICATION_SECTION);
+            applicationSection.waitUntilClickable().withTimeoutOf(Duration.ofSeconds(30));
+            if (!applicationSection.getAttribute("class").contains("active")) {
+                applicationSection.click();
+                logStep("Clicked Application section in left navigation to expand it");
+                waitABit(1000); // Wait for submenu to expand
+            }
+
+            // Wait for the Investment Policy Templates link to be visible and clickable
+            WebElementFacade iptLink = find(INVESTMENT_POLICY_TEMPLATES_LINK);
+            iptLink.waitUntilClickable().withTimeoutOf(Duration.ofSeconds(30));
+            iptLink.click();
+            logStep("Clicked Investment Policy Templates link under Application section");
+            // Wait for navigation to complete
+            waitABit(2000);
+        } catch (Exception e) {
+            throw new ElementException("Failed to navigate to Investment Policy Templates from Workspace Setup", e);
+        }
+    }
+
+    /**
+     * Checks if the Investment Policy Templates link is visible under the Application section in the left navigation.
+     * @return true if visible, false otherwise
+     */
+    public boolean isInvestmentPolicyTemplatesVisible() {
+        try {
+            WebElementFacade applicationSection = find(APPLICATION_SECTION);
+            applicationSection.waitUntilVisible().withTimeoutOf(Duration.ofSeconds(10));
+            if (!applicationSection.getAttribute("class").contains("active")) {
+                applicationSection.click();
+                waitABit(500);
+            }
+            WebElementFacade iptLink = find(INVESTMENT_POLICY_TEMPLATES_LINK);
+            return iptLink.isVisible();
+        } catch (Exception e) {
+            logStep("Investment Policy Templates link not visible: " + e.getMessage());
+            return false;
+        }
+    }
 
     public void clickInvestmentPolicyTemplatesLink() {
         try {
